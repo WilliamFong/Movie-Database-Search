@@ -1,0 +1,16 @@
+{
+  "name": "movie-app",
+  "version": "1.0.0",
+  "description": "movie application to search in moviedb api",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Angie, William, Alisha, Jurelly, Daniel",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^5.1.0",
+    "moviedb": "file:../moviedb",
+    "yargs": "^11.0.0"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "moviedb",
+  "version": "1.0.0",
+  "description": "movieDb get requests",
+  "main": "moviedb.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Angie, William, Alisha, Jurelly, Daniel",
+  "license": "ISC",
+  "dependencies": {
+    "npm": "^5.7.1",
+    "superagent": "^3.8.2"
+  }
+}
