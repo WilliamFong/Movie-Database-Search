@@ -57,7 +57,7 @@ const getSearch = (query) => {
             })
             showPromt(list)
                 .then(selected =>{
-                    console.log(list[selected.search.slice(0, selected.search.indexOf(')'))])
+                    print(list[selected.search.slice(0, selected.search.indexOf(')'))-1])
                 })
         })
 }
@@ -86,8 +86,16 @@ const getPersonSearch = (query) => {
 const getMovieSearch = (query) => {
     
 }
-const print = (result) =>{
+const print = (item) =>{
     //display info once user choses from search results
+    //todo person is harder since it has known for
+    if(item.media_type == 'movie')
+       console.log(`name: ${item.name}\n type: ${item.media_type} \nrelease_date: ${item.release_date} \noverview: ${item.overview}`)
+    else if(item.media_type == 'tv')
+        console.log(``)
+    else if(item.media_type == 'person')
+        console.log()
+
 }
 
 module.exports = {
