@@ -5,7 +5,6 @@ const
     // need help look at https://developers.themoviedb.org/3/search/search-tv-shows
     // look at the tabs on left for search tb search people and search movies
     const _fetch = (command) =>{
-        console.log(config.url)
         return superagent.get(`${config.url}/${command}`)
         .then(response => response.body)
         .catch(error => error.response.body)

@@ -21,7 +21,6 @@ const flags = yargs.usage('$0: Usage <cmd> [options]')
                         //make sure user only search one at a time
                         //handler will use to see what to search if no options are chosen the use multi search
                         handler: (argv) => {
-                            console.log(argv)
                             if(argv._.length >1){
                                 app.getSearch(argv._[1])
                             }
