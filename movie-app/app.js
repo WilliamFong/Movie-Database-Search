@@ -10,49 +10,13 @@ const getSearch = (query) => {
     moviedb.multiSearch(query)
         .then(search => {
             let list = search.results.map(item =>{
-                if(item.media_type ==='movie'){
-                    return({
-                            // id : item.id,
-                            name : item.title,
-                            release_date : item.release_date,
-                            overview : item.overview,
-                            media_type : item.media_type
-                    })
-                }
+                if(item.media_type ==='movie')
+                    return getMovieObj(item)
                 else if(item.media_type ==='tv'){
-                    return({
-                        // id : item.id,
-                        name: item.name,
-                        first_air_date : item.first_air_date,
-                        overview : item.overview,
-                        media_type : item.media_type
-                    })
+                    return getTvObj(item)
                  }
                 else{
-                    return({
-                        // id : item.id,
-                        name: item.name,
-                        media_type : item.media_type,
-                        known_for: item.known_for.map(film =>{
-                            if(item.media_type ==='movie'){
-                                return({
-                                        name : item.title,
-                                        release_date : item.release_date,
-                                        overview : item.overview,
-                                        media_type : item.media_type
-                                })
-                            }
-                            else if(item.media_type ==='tv'){
-                                return({
-                                    name: item.name,
-                                    first_air_date : item.first_air_date,
-                                    overview : item.overview,
-                                    media_type : item.media_type
-                                })
-                             }
-                        })
-
-                    })
+                    return getPersonObj(item)
                 }
             })
             showPromt(list)
@@ -90,12 +54,49 @@ const print = (item) =>{
     //display info once user choses from search results
     //todo person is harder since it has known for
     if(item.media_type == 'movie')
-       console.log(`name: ${item.name}\n type: ${item.media_type} \nrelease_date: ${item.release_date} \noverview: ${item.overview}`)
+       console.log(`name: ${item.name}\ntype: ${item.media_type} \nrelease_date: ${item.release_date} \noverview: ${item.overview}`)
     else if(item.media_type == 'tv')
-        console.log(``)
-    else if(item.media_type == 'person')
-        console.log()
+        console.log(item)
+    else if(item.media_type == 'person'){
+        console.log(item)
+    }
 
+}
+
+const getMovieObj = (item) =>{
+    return ({
+        // id : item.id,
+        name : item.title,
+        release_date : item.release_date,
+        overview : item.overview,
+        media_type : 'movie'
+})
+}
+ 
+const getTvObj = (item) =>{
+    return ({
+        // id : item.id,
+        name: item.name,
+        first_air_date : item.first_air_date,
+        overview : item.overview,
+        media_type : 'tv'
+    })
+}
+
+const getPersonObj = (item) =>{
+    return({
+        name: item.name,
+        media_type : 'person',
+        known_for: item.known_for.map(film =>{
+            if(item.media_type ==='movie'){
+                return(getMovieObj(film))
+            }
+            else if(item.media_type ==='tv'){
+                return(getTvObj(film))
+             }
+        })
+
+    })
 }
 
 module.exports = {
