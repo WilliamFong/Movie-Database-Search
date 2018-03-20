@@ -108,7 +108,6 @@ const getPersonObj = (item) =>{
                 return(getTvObj(film))
              }
         })
-
     })
 }
 

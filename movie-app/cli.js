@@ -15,8 +15,9 @@ const flags = yargs.usage('$0: Usage <cmd> [options]')
                                 describe: 'search moviedb base on televsion search'
                             }).option('m',{
                                 alias: 'movies',
-                                describe: 'searcg noviedb base on movie search'
+                                describe: 'search moviedb base on movie search'
                             } )
+                            .help('h')
                         },
                         //make sure user only search one at a time
                         //handler will use to see what to search if no options are chosen the use multi search
@@ -27,7 +28,6 @@ const flags = yargs.usage('$0: Usage <cmd> [options]')
                             }
                             //implemnt when user puts -tv -p -m 
                             if(argv.t != null){
-
                                 app.getTvSearch(argv.t)
                                 console.log(argv.t)
                             }
