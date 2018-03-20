@@ -31,6 +31,10 @@ const flags = yargs.usage('$0: Usage <cmd> [options]')
                                 app.getTvSearch(argv.t)
                                 console.log(argv.t)
                             }
+                            if(argv.p != null) {
+                                app.getPersonSearch(argv.p)
+                            }
+                            console.log(argv)
                         }
                     })
                     .help('help')
