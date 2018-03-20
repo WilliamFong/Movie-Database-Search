@@ -9,7 +9,6 @@ const
         .then(response => response.body)
         .catch(error => error.response.body)
     }
-//i dont know it works yet havent tested it out
 exports.tvSearch = (query) => {
     if(query != null){
         return _fetch(`search/tv?api_key=${config.apiKey}&query=${query}`)
