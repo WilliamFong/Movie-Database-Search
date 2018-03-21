@@ -56,11 +56,23 @@ const getTvSearch = (query) => {
 }
 
 const getPersonSearch = (query) => {
-    
+    moviedb.personSearch(query)
+        .then(results => {
+            console.log(results)
+
+            let list = results.results.map(item => getPersonObj(item))
+            showPromt(list)
+            .then(selected =>{
+                print(list[selected.search.slice(0, selected.search.indexOf(')'))-1])
+            })
+
+        })
 }
+
 const getMovieSearch = (query) => {
     
 }
+
 const print = (item) =>{
     //display info once user choses from search results
     //todo person is harder since it has known for
@@ -111,5 +123,6 @@ const getPersonObj = (item) =>{
 
 module.exports = {
     getSearch,
-    getTvSearch
+    getTvSearch,
+    getPersonSearch
 }
