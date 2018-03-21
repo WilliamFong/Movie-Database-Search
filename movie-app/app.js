@@ -53,8 +53,6 @@ const getTvSearch = (query) => {
             })
 
         })
-
-     
 }
 
 const getPersonSearch = (query) => {
@@ -101,10 +99,10 @@ const getPersonObj = (item) =>{
         name: item.name,
         media_type : 'person',
         known_for: item.known_for.map(film =>{
-            if(item.media_type ==='movie'){
+            if(film.media_type ==='movie'){
                 return(getMovieObj(film))
             }
-            else if(item.media_type ==='tv'){
+            else if(film.media_type ==='tv'){
                 return(getTvObj(film))
              }
         })
