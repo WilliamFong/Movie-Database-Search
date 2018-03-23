@@ -10,9 +10,11 @@ const flags = yargs.usage('$0: Usage <cmd> [options]')
                             return yargs.option('p', {
                                 alias: 'person',
                                 describe: 'search moviedb base on person search',
+                                nargs: 1,
                             }).option('t', {
                                 alias: 'television',
-                                describe: 'search moviedb base on televsion search'
+                                describe: 'search moviedb base on televsion search',
+                                nargs: 1,
                             }).option('m',{
                                 alias: 'movies',
                                 describe: 'search moviedb base on movie search'
@@ -36,6 +38,6 @@ const flags = yargs.usage('$0: Usage <cmd> [options]')
                             console.log(argv)
                         }
                     })
-                    .demand(1, 'Please enter command.')
+                    .demandCommand(1, 'Please enter a command.')
                     .help('help')
                     .argv
