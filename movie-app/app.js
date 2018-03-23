@@ -66,7 +66,15 @@ const getPersonSearch = (query) => {
 }
 
 const getMovieSearch = (query) => {
-    
+    moviedb.movieSearch(query)
+        .then(results => {
+            let list = results.results.map(item => getMovieObj(item))
+            showPromt(list)
+            .then(selected =>{
+                print(list[selected.search.slice(0, selected.search.indexOf(')'))-1])
+            })
+
+        })
 }
 
 const print = (item) =>{
