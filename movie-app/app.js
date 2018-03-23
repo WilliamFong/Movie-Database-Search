@@ -44,8 +44,6 @@ const showPromt = (list)=>{
 const getTvSearch = (query) => {
     moviedb.tvSearch(query)
         .then(results => {
-            console.log(results)
-
             let list = results.results.map(item => getTvObj(item))
             showPromt(list)
             .then(selected =>{
@@ -58,8 +56,6 @@ const getTvSearch = (query) => {
 const getPersonSearch = (query) => {
     moviedb.personSearch(query)
         .then(results => {
-            console.log(results)
-
             let list = results.results.map(item => getPersonObj(item))
             showPromt(list)
             .then(selected =>{
@@ -124,5 +120,6 @@ const getPersonObj = (item) =>{
 module.exports = {
     getSearch,
     getTvSearch,
-    getPersonSearch
+    getPersonSearch,
+    getMovieSearch
 }

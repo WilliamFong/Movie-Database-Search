@@ -22,19 +22,23 @@ const flags = yargs.usage('$0: Usage <cmd> [options]')
                         //make sure user only search one at a time
                         //handler will use to see what to search if no options are chosen the use multi search
                         handler: (argv) => {
+
                             //when user just put search <arg>
-                            if(argv._.length >1){
-                                app.getSearch(argv._[1])
+                            if(argv._.length >1  & argv.p == null & argv.t == null & argv.m ==null){
+                                app.getSearch(argv._.slice(1).join('+'))
                             }
                             //implemnt when user puts -tv -p -m 
-                            if(argv.t != null){
-                                app.getTvSearch(argv.t)
-                                console.log(argv.t)
+                            if(argv.t != null & argv.p == null & argv.m ==null){
+                                app.getTvSearch(`${argv.t}${argv._.slice(1).join('+')}`)
                             }
-                            if(argv.p != null) {
-                                app.getPersonSearch(argv.p)
+                            else if(argv.p != null & argv.t == null & argv.m ==null){
+                                app.getPersonSearch(`${argv.p}${argv._.slice(1).join('+')}`)
                             }
-                            console.log(argv)
+                            else if(argv.m != null & argv.p == null & argv.t == null){
+                                app.getMovieSearch(`${argv.m}${argv._.slice(1).join('+')}`)
+                            }else{
+                                yargs.showHelp()
+                            }
                         }
                     })
                     .help('help')
