@@ -1,4 +1,4 @@
-const 
+const
     moviedb = require('moviedb'),
     inquirer = require('inquirer'),
     printMessage = require('print-message'),
@@ -11,37 +11,43 @@ const
 const getSearch = (query) => {
     moviedb.multiSearch(query)
         .then(search => {
-            let list = search.results.map(item =>{
-                if(item.media_type ==='movie')
+            let list = search.results.map(item => {
+                if (item.media_type ==='movie')
                     return getMovieObj(item)
-                else if(item.media_type ==='tv'){
+                else if (item.media_type ==='tv') {
                     return getTvObj(item)
                  }
-                else{
+                else {
                     return getPersonObj(item)
                 }
             })
-            showPrompt(list)
-                .then(selected =>{
+
+            if (list.length > 1) {
+                showPrompt(list)
+                .then(selected => {
                     moviedb.getItem(selected.search.from, selected.search.id)
                         .then(results => {
-                            if(selected.search.from == 'tv'){
+                            if (selected.search.from == 'tv') {
                                 print(getTvObj(results))
-                            }else if(selected.search.from == 'person'){
+                            } else if (selected.search.from == 'person') {
                                 print(formatPerson(results))
-                            }else if(selected.search.from == 'movie'){
+                            } else if (selected.search.from == 'movie') {
                                 print(getMovieObj(results))
                             }
                         })
                 })
+            } else {
+                console.log('No Results Found.')
+            }
         })
 }
 
-const showPrompt = (list)=>{
+const showPrompt = (list) => {
     let index = 1
-    let choices =  list.map(item => {
-        return {name: item.name, value: {id: item.id, from: item.media_type}} 
+    let choices = list.map(item => {
+        return {name: item.name, value: {id: item.id, from: item.media_type}}
     })
+
     return inquirer.prompt([{
         type: 'list',
         message: 'select results to find out more',
@@ -56,12 +62,15 @@ const getTvSearch = (query) => {
     moviedb.tvSearch(query)
         .then(results => {
             let list = results.results.map(item => getTvObj(item))
-            showPrompt(list)
-            .then(selected =>{
-                moviedb.getItem(selected.search.from, selected.search.id)
-                .then(results => print(getTvObj(results)))
-            })
-
+            if (list.length > 1) {
+                showPrompt(list)
+                .then(selected => {
+                    moviedb.getItem(selected.search.from, selected.search.id)
+                    .then(results => print(getTvObj(results)))
+                })
+            } else {
+                console.log('No Results Found.')
+            }
         })
 }
 
@@ -69,12 +78,15 @@ const getPersonSearch = (query) => {
     moviedb.personSearch(query)
         .then(results => {
             let list = results.results.map(item => getPersonObj(item))
-            showPrompt(list)
-            .then(selected =>{
-                moviedb.getItem(selected.search.from, selected.search.id)
-                .then(results => print(formatPerson(results)))
-            })
-
+            if (list.length > 1 ) {
+                showPrompt(list)
+                .then(selected => {
+                    moviedb.getItem(selected.search.from, selected.search.id)
+                    .then(results => print(formatPerson(results)))
+                })
+            } else {
+                console.log('No Results Found.')
+            }
         })
 }
 
@@ -82,18 +94,21 @@ const getMovieSearch = (query) => {
     moviedb.movieSearch(query)
         .then(results => {
             let list = results.results.map(item => getMovieObj(item))
-            showPrompt(list)
-            .then(selected =>{
-                moviedb.getItem(selected.search.from, selected.search.id)
-                .then(results => print(getMovieObj(results)))
-            })
-
+            if (list.length > 1) {
+                showPrompt(list)
+                .then(selected => {
+                    moviedb.getItem(selected.search.from, selected.search.id)
+                    .then(results => print(getMovieObj(results)))
+                })
+            } else {
+                console.log('No Results Found.')
+            }
         })
 }
 
-const print = (item) =>{
+const print = (item) => {
     //display info once user choses from search results
-    if (item.media_type == 'movie'){
+    if (item.media_type == 'movie') {
         console.log('-----------------------------------------------------------------------------------------------------')
         printMessage(['Name: ', item.name + '\n', 'Type: ', item.media_type + '\n', 'Release Date: ', item.release_date + '\n', 'Overview: ', wrap(item.overview)],{
         border: false,
@@ -101,7 +116,7 @@ const print = (item) =>{
         })
         console.log('-----------------------------------------------------------------------------------------------------')
     }
-    else if (item.media_type == 'tv'){
+    else if (item.media_type == 'tv') {
         console.log('-----------------------------------------------------------------------------------------------------')
         printMessage(['Name: ', item.name + '\n', 'Type: ', item.media_type + '\n', 'Release Date: ', item.first_air_date + '\n', 'Overview: ', wrap(item.overview)],{
         border: false,
@@ -109,7 +124,7 @@ const print = (item) =>{
         })
         console.log('-----------------------------------------------------------------------------------------------------')
     }
-    else if (item.media_type == 'person'){
+    else if (item.media_type == 'person') {
         console.log('-----------------------------------------------------------------------------------------------------')
         printMessage(['Name: ', item.name + '\n', 'Birthday: ', item.bday + '\n', 'Place of Birth: ', item.place_of_birth + '\n', 'Biography: ', wrap(item.bio)],{
         border: false,
@@ -120,7 +135,7 @@ const print = (item) =>{
 
 }
 
-const getMovieObj = (item) =>{
+const getMovieObj = (item) => {
     return ({
         id : item.id,
         name : item.title,
@@ -128,10 +143,10 @@ const getMovieObj = (item) =>{
         release_date : item.release_date,
         overview : item.overview,
         media_type : 'movie'
-})
+    })
 }
  
-const getTvObj = (item) =>{
+const getTvObj = (item) => {
     return ({
         id : item.id,
         name: item.name,
@@ -141,23 +156,23 @@ const getTvObj = (item) =>{
     })
 }
 
-const getPersonObj = (item) =>{
-    return({
+const getPersonObj = (item) => {
+    return ({
         id : item.id,
         name: item.name,
         media_type : 'person',
-        known_for: item.known_for.map(film =>{
-            if(film.media_type ==='movie'){
+        known_for: item.known_for.map(film => {
+            if (film.media_type === 'movie') {
                 return(getMovieObj(film))
             }
-            else if(film.media_type ==='tv'){
+            else if (film.media_type === 'tv') {
                 return(getTvObj(film))
-             }
+            }
         })
     })
 }
 
-const formatPerson = (person) =>{
+const formatPerson = (person) => {
     return {
         name: person.name,
         bday: person.birthday,
