@@ -26,7 +26,7 @@ const getSearch = (query) => {
                             if(selected.search.from == 'tv'){
                                 print(getTvObj(results))
                             }else if(selected.search.from == 'person'){
-                                print(getPersonObj(results))
+                                print(formatPerson(results))
                             }else if(selected.search.from == 'movie'){
                                 print(getMovieObj(results))
                             }
@@ -57,7 +57,7 @@ const getTvSearch = (query) => {
             showPromt(list)
             .then(selected =>{
                 moviedb.getItem(selected.search.from, selected.search.id)
-                .then(results => console.log(getTvObj(results)))
+                .then(results => print(getTvObj(results)))
             })
 
         })
@@ -70,9 +70,7 @@ const getPersonSearch = (query) => {
             showPromt(list)
             .then(selected =>{
                 moviedb.getItem(selected.search.from, selected.search.id)
-                .then(results => {
-                    console.log(getPersonObj(results))
-                })
+                .then(results => print(formatPerson(results)))
             })
 
         })
@@ -85,7 +83,7 @@ const getMovieSearch = (query) => {
             showPromt(list)
             .then(selected =>{
                 moviedb.getItem(selected.search.from, selected.search.id)
-                .then(results => console.log(getMovieObj(results)))
+                .then(results => print(getMovieObj(result)))
             })
 
         })
@@ -139,6 +137,16 @@ const getPersonObj = (item) =>{
              }
         })
     })
+}
+
+const formatPerson = (person) =>{
+    return {
+        name: person.name,
+        bday: person.birthday,
+        place_of_birth: person.place_of_birth,
+        bio: person.biography,
+        media_type: 'person'
+    }
 }
 
 module.exports = {
