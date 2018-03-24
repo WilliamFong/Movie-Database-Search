@@ -11,6 +11,8 @@
   "dependencies": {
     "inquirer": "^5.1.0",
     "moviedb": "file:../moviedb",
+    "print-message": "^2.1.0",
+    "wordwrap": "^1.0.0",
     "yargs": "^11.0.0"
   }
 }

@@ -1,6 +1,8 @@
 const 
     moviedb = require('moviedb'),
-    inquirer = require('inquirer')
+    inquirer = require('inquirer'),
+    printMessage = require('print-message'),
+    wrap = require('wordwrap')(100)
 
     //for tv get the overview, name, fits_air_date
     //for movie get overview, release_date, title
@@ -44,8 +46,6 @@ const showPromt = (list)=>{
 const getTvSearch = (query) => {
     moviedb.tvSearch(query)
         .then(results => {
-            console.log(results)
-
             let list = results.results.map(item => getTvObj(item))
             showPromt(list)
             .then(selected =>{
@@ -58,8 +58,6 @@ const getTvSearch = (query) => {
 const getPersonSearch = (query) => {
     moviedb.personSearch(query)
         .then(results => {
-            console.log(results)
-
             let list = results.results.map(item => getPersonObj(item))
             showPromt(list)
             .then(selected =>{
@@ -76,14 +74,43 @@ const getMovieSearch = (query) => {
 const print = (item) =>{
     //display info once user choses from search results
     //todo person is harder since it has known for
-    if(item.media_type == 'movie')
+    /*if(item.media_type == 'movie')
        console.log(`name: ${item.name}\ntype: ${item.media_type} \nrelease_date: ${item.release_date} \noverview: ${item.overview}`)
     else if(item.media_type == 'tv')
         console.log(item)
     else if(item.media_type == 'person'){
         console.log(item)
+    }*/
+    /*printMessage(['name: '+ item.name, 'type: ' + item.media_type, 'release date ' + item.release_date, 'overview: ' + wrap(item.overview)],{
+        border: false,
+        borderColor: 'blue',
+        color: 'yellow'
+    })*/
+    if (item.media_type == 'movie'){
+        console.log('-----------------------------------------------------------------------------------------------------')
+        printMessage(['Name: ', item.name + '\n', 'Type: ', item.media_type + '\n', 'Release Date: ', item.release_date + '\n', 'Overview: ', wrap(item.overview)],{
+        border: false,
+        color: 'blue'
+        })
+        console.log('-----------------------------------------------------------------------------------------------------')
     }
-
+    else if (item.media_type == 'tv'){
+        console.log('-----------------------------------------------------------------------------------------------------')
+        printMessage(['Name: ', item.name + '\n', 'Type: ', item.media_type + '\n', 'Release Date: ', item.first_air_date + '\n', 'Overview: ', wrap(item.overview)],{
+        border: false,
+        color: 'red'
+        })
+        console.log('-----------------------------------------------------------------------------------------------------')
+    }
+    else if (item.media_type == 'person'){
+        console.log(item)
+        console.log('-----------------------------------------------------------------------------------------------------')
+        printMessage(['Name: ', item.name + '\n', 'Type: ', item.media_type + '\n', 'Release Date: ', item.first_air_date + '\n', 'Overview: ', wrap(item.overview)],{
+        border: false,
+        color: 'red'
+        })
+        console.log('-----------------------------------------------------------------------------------------------------')
+    }
 }
 
 const getMovieObj = (item) =>{
