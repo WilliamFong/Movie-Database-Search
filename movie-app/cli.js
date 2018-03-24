@@ -17,7 +17,8 @@ const flags = yargs.usage('$0: Usage <cmd> [options]')
                                 nargs: 1
                             }).option('m',{
                                 alias: 'movies',
-                                describe: 'search moviedb base on movie search'
+                                describe: 'search moviedb base on movie search',
+                                nargs: 1
                             } )
                             .help('h')
                         },

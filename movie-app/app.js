@@ -38,7 +38,6 @@ const getSearch = (query) => {
 }
 
 const showPromt = (list)=>{
-    let index = 1
     let choices =  list.map(item => {
         return {name: item.name, value: {id: item.id, from: item.media_type}} 
     })
@@ -85,7 +84,7 @@ const getMovieSearch = (query) => {
             showPromt(list)
             .then(selected =>{
                 moviedb.getItem(selected.search.from, selected.search.id)
-                .then(results => print(getMovieObj(result)))
+                .then(results => print(getMovieObj(results)))
             })
 
         })
