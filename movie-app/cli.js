@@ -29,13 +29,16 @@ const flags = yargs.usage('$0: Usage <cmd> [options]')
                             }
                             //implemnt when user puts -tv -p -m 
                             else if(argv.t != null & argv.p == null & argv.m ==null & argv.t != true){
-                                app.getTvSearch(`${argv.t}${argv._.slice(1).join('+')}`)
+                                console.log(`${argv.t}${argv._.slice(1).join('+')}`);
+                                app.getTvSearch(`${argv.t}+${argv._.slice(1).join('+')}`)
                             }
                             else if(argv.p != null & argv.t == null & argv.m ==null & argv.p !=true){
-                                app.getPersonSearch(`${argv.p}${argv._.slice(1).join('+')}`)
+                                console.log(`${argv.p}+${argv._.slice(1).join('+')}`);
+                                app.getPersonSearch(`${argv.p}+${argv._.slice(1).join('+')}`)
                             }
                             else if(argv.m != null & argv.p == null & argv.t == null & argv.m !=true){
-                                app.getMovieSearch(`${argv.m}${argv._.slice(1).join('+')}`)
+                                console.log(`${argv.m}+${argv._.slice(1).join('+')}`);
+                                app.getMovieSearch(`${argv.m}+${argv._.slice(1).join('+')}`)
                             }else{
                                 yargs.showHelp()
                             }
