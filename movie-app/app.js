@@ -1,6 +1,8 @@
 const 
     moviedb = require('moviedb'),
-    inquirer = require('inquirer')
+    inquirer = require('inquirer'),
+    printMessage = require('print-message'),
+    wrap = require('wordwrap')(100)
 
     //for tv get the overview, name, fits_air_date
     //for movie get overview, release_date, title
@@ -91,13 +93,30 @@ const getMovieSearch = (query) => {
 
 const print = (item) =>{
     //display info once user choses from search results
-    //todo person is harder since it has known for
-    if(item.media_type == 'movie')
-       console.log(`name: ${item.name}\ntype: ${item.media_type} \nrelease_date: ${item.release_date} \noverview: ${item.overview}`)
-    else if(item.media_type == 'tv')
+    if (item.media_type == 'movie'){
+        console.log('-----------------------------------------------------------------------------------------------------')
+        printMessage(['Name: ', item.name + '\n', 'Type: ', item.media_type + '\n', 'Release Date: ', item.release_date + '\n', 'Overview: ', wrap(item.overview)],{
+        border: false,
+        color: 'blue'
+        })
+        console.log('-----------------------------------------------------------------------------------------------------')
+    }
+    else if (item.media_type == 'tv'){
+        console.log('-----------------------------------------------------------------------------------------------------')
+        printMessage(['Name: ', item.name + '\n', 'Type: ', item.media_type + '\n', 'Release Date: ', item.first_air_date + '\n', 'Overview: ', wrap(item.overview)],{
+        border: false,
+        color: 'red'
+        })
+        console.log('-----------------------------------------------------------------------------------------------------')
+    }
+    else if (item.media_type == 'person'){
         console.log(item)
-    else if(item.media_type == 'person'){
-        console.log(item)
+        console.log('-----------------------------------------------------------------------------------------------------')
+        printMessage(['Name: ', item.name + '\n', 'Birthday: ', item.bday + '\n', 'Place of Birth: ', item.place_of_birth + '\n', 'Biography: ', wrap(item.bio)],{
+        border: false,
+        color: 'green'
+        })
+        console.log('-----------------------------------------------------------------------------------------------------')
     }
 
 }
