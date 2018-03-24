@@ -2,7 +2,7 @@
     -we needed to get an api key inorder to to any api calls
     -stored all the info in the config.json as requiered 
     -useded 4 different search calls, multi/person/movie/tv
-2) cli
+2) angi will talk about cli 
     -multi search is our defult search where no option is given
     - we use option for our person search -p to search the api witch calls search/person 
     folled by quary string

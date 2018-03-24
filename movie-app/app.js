@@ -42,16 +42,10 @@ const getSearch = (query) => {
         })
 }
 
-<<<<<<< HEAD
 const showPromt = (list)=>{
     let choices =  list.map(item => {
         return {name: item.name, value: {id: item.id, from: item.media_type}} 
-=======
-const showPrompt = (list) => {
-    let index = 1
-    let choices = list.map(item => {
-        return {name: item.name, value: {id: item.id, from: item.media_type}}
->>>>>>> 999a89237247abd60ad4c3b571246f26df5f45f5
+
     })
 
     return inquirer.prompt([{
@@ -100,14 +94,7 @@ const getMovieSearch = (query) => {
     moviedb.movieSearch(query)
         .then(results => {
             let list = results.results.map(item => getMovieObj(item))
-<<<<<<< HEAD
-            showPromt(list)
-            .then(selected =>{
-                moviedb.getItem(selected.search.from, selected.search.id)
-                .then(results => print(getMovieObj(results)))
-            })
 
-=======
             if (list.length > 1) {
                 showPrompt(list)
                 .then(selected => {
@@ -117,7 +104,6 @@ const getMovieSearch = (query) => {
             } else {
                 console.log('No Results Found.')
             }
->>>>>>> 999a89237247abd60ad4c3b571246f26df5f45f5
         })
 }
 
