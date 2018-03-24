@@ -23,7 +23,13 @@ const getSearch = (query) => {
                 .then(selected =>{
                     moviedb.getItem(selected.search.from, selected.search.id)
                         .then(results => {
-                            console.log(results);
+                            if(selected.search.from == 'tv'){
+                                print(getTvObj(results))
+                            }else if(selected.search.from == 'person'){
+                                print(getPersonObj(results))
+                            }else if(selected.search.from == 'movie'){
+                                print(getMovieObj(results))
+                            }
                         })
                 })
         })
