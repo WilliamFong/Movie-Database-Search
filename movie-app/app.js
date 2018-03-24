@@ -51,7 +51,7 @@ const getTvSearch = (query) => {
             showPromt(list)
             .then(selected =>{
                 moviedb.getItem(selected.search.from, selected.search.id)
-                .then(results => console.log(results))
+                .then(results => console.log(getTvObj(results)))
             })
 
         })
@@ -65,7 +65,7 @@ const getPersonSearch = (query) => {
             .then(selected =>{
                 moviedb.getItem(selected.search.from, selected.search.id)
                 .then(results => {
-                    console.log(results)
+                    console.log(getPersonObj(results))
                 })
             })
 
@@ -79,7 +79,7 @@ const getMovieSearch = (query) => {
             showPromt(list)
             .then(selected =>{
                 moviedb.getItem(selected.search.from, selected.search.id)
-                .then(results => console.log(results))
+                .then(results => console.log(getMovieObj(results)))
             })
 
         })
