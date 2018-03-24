@@ -21,7 +21,7 @@ const getSearch = (query) => {
                     return getPersonObj(item)
                 }
             })
-            showPromt(list)
+            showPrompt(list)
                 .then(selected =>{
                     moviedb.getItem(selected.search.from, selected.search.id)
                         .then(results => {
@@ -37,7 +37,7 @@ const getSearch = (query) => {
         })
 }
 
-const showPromt = (list)=>{
+const showPrompt = (list)=>{
     let index = 1
     let choices =  list.map(item => {
         return {name: item.name, value: {id: item.id, from: item.media_type}} 
@@ -56,7 +56,7 @@ const getTvSearch = (query) => {
     moviedb.tvSearch(query)
         .then(results => {
             let list = results.results.map(item => getTvObj(item))
-            showPromt(list)
+            showPrompt(list)
             .then(selected =>{
                 moviedb.getItem(selected.search.from, selected.search.id)
                 .then(results => print(getTvObj(results)))
@@ -69,7 +69,7 @@ const getPersonSearch = (query) => {
     moviedb.personSearch(query)
         .then(results => {
             let list = results.results.map(item => getPersonObj(item))
-            showPromt(list)
+            showPrompt(list)
             .then(selected =>{
                 moviedb.getItem(selected.search.from, selected.search.id)
                 .then(results => print(formatPerson(results)))
@@ -82,10 +82,10 @@ const getMovieSearch = (query) => {
     moviedb.movieSearch(query)
         .then(results => {
             let list = results.results.map(item => getMovieObj(item))
-            showPromt(list)
+            showPrompt(list)
             .then(selected =>{
                 moviedb.getItem(selected.search.from, selected.search.id)
-                .then(results => print(getMovieObj(result)))
+                .then(results => print(getMovieObj(results)))
             })
 
         })
