@@ -110,7 +110,6 @@ const print = (item) =>{
         console.log('-----------------------------------------------------------------------------------------------------')
     }
     else if (item.media_type == 'person'){
-        console.log(item)
         console.log('-----------------------------------------------------------------------------------------------------')
         printMessage(['Name: ', item.name + '\n', 'Birthday: ', item.bday + '\n', 'Place of Birth: ', item.place_of_birth + '\n', 'Biography: ', wrap(item.bio)],{
         border: false,
