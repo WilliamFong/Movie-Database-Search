@@ -21,7 +21,10 @@ const getSearch = (query) => {
             })
             showPromt(list)
                 .then(selected =>{
-                    print(list[selected.search.slice(0, selected.search.indexOf(')'))-1])
+                    moviedb.getItem(selected.search.from, selected.search.id)
+                        .then(results => {
+                            console.log(results);
+                        })
                 })
         })
 }
@@ -29,7 +32,7 @@ const getSearch = (query) => {
 const showPromt = (list)=>{
     let index = 1
     let choices =  list.map(item => {
-        return `${index++}) ${item.media_type} : ${item.name}`
+        return {name: item.name, value: {id: item.id, from: item.media_type}} 
     })
     return inquirer.prompt([{
         type: 'list',
@@ -47,7 +50,8 @@ const getTvSearch = (query) => {
             let list = results.results.map(item => getTvObj(item))
             showPromt(list)
             .then(selected =>{
-                print(list[selected.search.slice(0, selected.search.indexOf(')'))-1])
+                moviedb.getItem(selected.search.from, selected.search.id)
+                .then(results => console.log(results))
             })
 
         })
@@ -59,7 +63,10 @@ const getPersonSearch = (query) => {
             let list = results.results.map(item => getPersonObj(item))
             showPromt(list)
             .then(selected =>{
-                print(list[selected.search.slice(0, selected.search.indexOf(')'))-1])
+                moviedb.getItem(selected.search.from, selected.search.id)
+                .then(results => {
+                    console.log(results)
+                })
             })
 
         })
@@ -71,7 +78,8 @@ const getMovieSearch = (query) => {
             let list = results.results.map(item => getMovieObj(item))
             showPromt(list)
             .then(selected =>{
-                print(list[selected.search.slice(0, selected.search.indexOf(')'))-1])
+                moviedb.getItem(selected.search.from, selected.search.id)
+                .then(results => console.log(results))
             })
 
         })
@@ -92,8 +100,9 @@ const print = (item) =>{
 
 const getMovieObj = (item) =>{
     return ({
-        // id : item.id,
+        id : item.id,
         name : item.title,
+        id: item.id,
         release_date : item.release_date,
         overview : item.overview,
         media_type : 'movie'
@@ -102,7 +111,7 @@ const getMovieObj = (item) =>{
  
 const getTvObj = (item) =>{
     return ({
-        // id : item.id,
+        id : item.id,
         name: item.name,
         first_air_date : item.first_air_date,
         overview : item.overview,
@@ -112,6 +121,7 @@ const getTvObj = (item) =>{
 
 const getPersonObj = (item) =>{
     return({
+        id : item.id,
         name: item.name,
         media_type : 'person',
         known_for: item.known_for.map(film =>{

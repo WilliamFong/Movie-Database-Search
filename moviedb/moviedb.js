@@ -38,3 +38,7 @@ exports.multiSearch = (query) =>{
         return -1
 }
 
+exports.getItem = (from, id) =>{
+    return _fetch(`${from}/${id}?api_key=${config.apiKey}`)
+}
+

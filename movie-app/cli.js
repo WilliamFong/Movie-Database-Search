@@ -28,7 +28,7 @@ const flags = yargs.usage('$0: Usage <cmd> [options]')
                                 app.getSearch(argv._.slice(1).join('+'))
                             }
                             //implemnt when user puts -tv -p -m 
-                            if(argv.t != null & argv.p == null & argv.m ==null & argv.t != true){
+                            else if(argv.t != null & argv.p == null & argv.m ==null & argv.t != true){
                                 app.getTvSearch(`${argv.t}${argv._.slice(1).join('+')}`)
                             }
                             else if(argv.p != null & argv.t == null & argv.m ==null & argv.p !=true){
