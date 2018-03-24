@@ -1,0 +1,25 @@
+1) introduced everyone and state what api we used.
+    -we needed to get an api key inorder to to any api calls
+    -stored all the info in the config.json as requiered 
+    -useded 4 different search calls, multi/person/movie/tv
+2) cli
+    -multi search is our defult search where no option is given
+    - we use option for our person search -p to search the api witch calls search/person 
+    folled by quary string
+    -same for the rest: tv,and movie
+    -checks for invalid intries
+
+3) specify more on the search
+    -used inquiere to print the choices of each name and return an object of id and media_type app.js line 42 and 48
+    in line 42 we make a new list of object containing name and value. in the inquiere doc name will use to display the list 
+    and value will be the return after user clicks. we need to know the media_type in order to find where the id belong
+    - made sure if theres no results to dont prompt the user to choose from nothing but instad print an message
+
+4) search by id
+    - getting the search id and medi type (tv, person,movie) we make another api call with the url of /mediatype/id?key=...
+    line 42 in moviedb.js thats the format what the api calls for
+    - use the type list so user can use arrow keys to choose
+    - after geting the results we needed to find what is usefull for us so for person we used dob, place of birth. n bio n media type
+    n for tv and movie we used name, media type, released date, n overview
+5)print-
+-wiliam will talk about this n his mod he used
