@@ -42,7 +42,7 @@ const getSearch = (query) => {
         })
 }
 
-const showPromt = (list)=>{
+const showPrompt = (list)=>{
     let choices =  list.map(item => {
         return {name: item.name, value: {id: item.id, from: item.media_type}} 
 
