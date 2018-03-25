@@ -23,4 +23,14 @@
     - after geting the results we needed to find what is usefull for us so for person we used dob, place of birth. n bio n media type
     n for tv and movie we used name, media type, released date, n overview
 5)print-
--wiliam will talk about this n his mod he used
+    -takes the object that is inputted with the information
+        -tv: name, type, release date, and overview
+        -movie: name, type, release date, and overview
+        -person: name, birthday, place of birth, biography
+    -print-message
+        -red: tv
+        -blue: movie
+        -green: person
+    -wordwrap
+        -100 characters, since it would overflow
+
